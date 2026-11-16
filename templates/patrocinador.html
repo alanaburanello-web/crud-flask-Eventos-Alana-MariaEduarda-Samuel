@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Patrocinadores</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+</head>
+<body>
+
+
+   <nav>
+       <a href="/"><button>Página Inicial</button></a>
+       <a href="/palestrantes"><button>Palestrantes</button></a>
+       <a href="/patrocinador"><button>Patrocinadores</button></a>
+       <a href="/eventos"><button>eventos</button></a>
+   </nav>
+
+
+
+    <main class="container">
+
+        <header class="cabecalho">
+            <h1>Patrocinadores</h1>
+            <p class="subtitulo">Cadastre e gerencie os patrocinadores do evento.</p>
+        </header>
+
+        <section class="painel">
+            <h2>Adicionar patrocinador</h2>
+
+            <form action="/patrocinador/enviar" method="POST">
+                <label>Nome da empresa</label>
+                <input type="text" name="nome_empresa" maxlength="150" required>
+
+                <label>Contato</label>
+                <input type="text" name="contato" maxlength="150">
+
+                <label>Valor do patrocínio (R$)</label>
+                <input type="number" name="valor_patrocinio" step="0.01" min="0" required>
+
+                <button type="submit">Adicionar patrocinador</button>
+            </form>
+        </section>
+
+        <section class="painel">
+            <h2>Patrocinadores cadastrados</h2>
+
+            <section class="tabela-area">
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Empresa</th>
+                        <th>Contato</th>
+                        <th>Valor</th>
+                        <th>Ações</th>
+                    </tr>
+
+                    {% for patrocinador in patrocinadores %}
+                    <tr>
+                        <td>{{ patrocinador[0] }}</td>
+                        <td>{{ patrocinador[1] }}</td>
+                        <td>{{ patrocinador[2] or '-' }}</td>
+                        <td>R$ {{ "%.2f"|format(patrocinador[3]|float) }}</td>
+
+                        <td class="acoes">
+                            <a class="botao editar" href="/patrocinador/editar/{{ patrocinador[0] }}">Editar</a>
+
+                            <form action="/patrocinador/excluir/{{ patrocinador[0] }}" method="POST" onsubmit="return confirm('Deseja excluir?')">
+                                <button class="excluir" type="submit">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td class="vazio" colspan="5">Nenhum patrocinador cadastrado.</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </section>
+        </section>
+
+    </main>
+
+</body>
+</html>

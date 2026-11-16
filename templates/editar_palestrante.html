@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar palestrante</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h1>Editar palestrante #{{ palestrante[0] }}</h1>
+
+<form action="/palestrantes/atualizar/{{ palestrante [0] }}" method="POST">
+    <label>Nome</label>
+    <input type="text" name="nome" maxlength="100" value="{{ palestrante [1] }}" required>
+
+    <label>Assunto</label>
+    <input type="text" name="assunto" maxlength="100" value="{{ palestrante [2] }}" required>
+
+     <label>Quantidade de minutos</label>
+    <input type="text" name="quantidade_minuto" maxlength="100" value="{{ palestrante [3] }}" required>
+
+     <label>Cache</label>
+    <input type="text" name="cache" maxlength="100" value="{{ palestrante [4] }}" required>
+
+    <button type="submit">Salvar alterações</button>
+    <a href="/">Cancelar</a>
+</form>
+
+</body>
+</html>

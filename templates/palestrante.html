@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de palestrantes</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+
+   <nav>
+       <a href="/"><button>Página Inicial</button></a>
+       <a href="/palestrantes"><button>Palestrantes</button></a>
+       <a href="/patrocinador"><button>Patrocinadores</button></a>
+       <a href="/eventos"><button>eventos</button></a>
+   </nav>
+
+
+<h1>Lista de palestrantes</h1>
+
+<form action="/palestrantes/enviar" method="POST">
+    <label>Nome</label>
+    <input type="text" name="nome" maxlength="100" required>
+
+     <label>Assunto</label>
+    <input type="text" name="assunto" maxlength="100" required>
+
+     <label>Quantidade de minutos</label>
+    <input type="text" name="quantidade_minuto" maxlength="100" required>
+
+     <label>Cache</label>
+    <input type="text" name="cache" maxlength="100" required>
+
+    <button type="submit">Adicionar palestrante</button>
+</form>
+
+<table>
+    <tr>
+        <th>#</th>
+        <th>Nome</th>
+        <th>Assunto</th>
+        <th>Quantidade de minutos</th>
+        <th>Cache</th>
+        <th>Ações</th>
+    </tr>
+
+    {% for palestrante in palestrantes %}
+    <tr>
+        <td>{{ palestrante[0] }}</td>
+        <td>{{ palestrante[1] }}</td>
+        <td>{{ palestrante[2] }}</td>
+        <td>{{ palestrante[3] }}</td>
+        <td>{{ palestrante[4] }}</td>
+        <td class="acoes">
+            <a class="botão editar" href="/palestrantes/editar/{{ palestrante [0] }}"> editar</a>
+            <form action="/palestrantes/excluir/{{ palestrante[0] }}" method="POST">
+                <button type="submit">Excluir</button>
+            </form>
+        </td>
+    </tr>
+
+     {% else %}
+    <tr>
+        <td colspan="5">Nenhum palestrante cadastrado.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Evento</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>Editar Evento #{{ eventos[0] }}</h1>
+
+<form action="/eventos/atualizar/{{ eventos[0] }}" method="POST">
+
+    <label>Nome</label>
+    <input type="text" name="nome" value="{{ eventos[1] }}" maxlength="100" required>
+
+    <label>Local</label>
+    <input type="text" name="local" value="{{ eventos[2] }}" maxlength="100" required>
+
+    <label>Quantidade de vagas</label>
+    <input type="text" name="quantidade_vaga" value="{{ eventos[3] }}" maxlength="100" required>
+
+    <label>Data do evento</label>
+    <input type="date" name="data_evento" value="{{ eventos[4] }}" required>
+
+    <button type="submit">Atualizar evento</button>
+</form>
+
+</body>
+</html>

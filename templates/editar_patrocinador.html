@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Patrocinador</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+</head>
+<body>
+
+    <main class="container">
+
+        <header class="cabecalho">
+            <h1>Editar patrocinador</h1>
+            <p class="subtitulo">Altere as informações do patrocinador.</p>
+        </header>
+
+        <section class="painel">
+            <h2>Patrocinador #{{ patrocinador[0] }}</h2>
+
+            <form action="/patrocinador/atualizar/{{ patrocinador[0] }}" method="POST">
+
+                <label>Nome da empresa</label>
+                <input type="text" name="nome_empresa"
+                       maxlength="150" value="{{ patrocinador[1] }}" required>
+
+                <label>Contato</label>
+                <input type="text" name="contato"
+                       maxlength="150" value="{{ patrocinador[2] or '' }}">
+
+                <label>Valor do patrocínio (R$)</label>
+                <input type="number" name="valor_patrocinio"
+                       step="0.01" min="0" value="{{ patrocinador[3] }}" required>
+
+                <button type="submit">Salvar alterações</button>
+                <a class="voltar" href="/">Cancelar</a>
+
+            </form>
+        </section>
+    </main>
+</body>
+</html>
